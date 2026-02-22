@@ -1,0 +1,5 @@
+2026-02-13 19:22:36,647 - src.llms.llm - ERROR - Error generating response: Connection error.
+2026-02-13 19:24:22,217 - __main__ - ERROR - Error generating response: Connection error.
+2026-02-13 19:25:53,897 - src.llms.llm - ERROR - Error generating response: Connection error.
+2026-02-13 19:27:22,616 - __main__ - ERROR - Error generating response: Connection error.
+2026-02-13 19:29:10,834 - __main__ - ERROR - Error generating response: Connection error.
