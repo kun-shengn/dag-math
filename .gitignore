@@ -1,8 +1,8 @@
 # 忽略 log 目录
-log/
+/log/
 
 # 忽略 tests/outcome 目录
-tests/outcome/
+/tests/outcome/
 
 # 忽略 dataset 目录
-dataset/
+/dataset/
