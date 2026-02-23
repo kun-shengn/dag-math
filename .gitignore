@@ -6,3 +6,6 @@
 
 # 忽略 dataset 目录
 /dataset/
+
+# 忽略 model 目录
+/model/

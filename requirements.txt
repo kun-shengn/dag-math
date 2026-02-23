@@ -7,6 +7,7 @@ omegaconf==2.4.0.dev3
 numpy
 pybind11
 tensordict
+trl
 peft
 liger-kernel
 word2number
