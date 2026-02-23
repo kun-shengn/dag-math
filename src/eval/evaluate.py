@@ -68,7 +68,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_name", type=str, default="aime25", help="Name of the dataset, e.g., 'math'.")
     # parser.add_argument("--file_path", type=str, default="data/eval_rm_maj_example/math_cot_100.jsonl", help="Path to the JSONL file with predictions.")
-    parser.add_argument("--file_path", type=str, default="tests/outcome/20260217/Qwen_8B_TestAIME2025.jsonl", help="Path to the JSONL file with predictions.")
+    parser.add_argument("--file_path", type=str, default="tests/outcome/2026-02-22/Qwen2-5_math_7B_TestAIME2025.jsonl", help="Path to the JSONL file with predictions.")
     parser.add_argument("--max_num_samples", type=int, default=None, help="Maximum number of samples to evaluate.")
     args = parser.parse_args()
 
