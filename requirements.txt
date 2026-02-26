@@ -9,6 +9,7 @@ pybind11
 tensordict
 trl
 peft
-liger-kernel
+# liger-kernel
 word2number
+openai
 math-verify[antlr4_11_0]==0.6.0

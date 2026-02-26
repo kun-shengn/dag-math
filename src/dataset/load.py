@@ -9,7 +9,7 @@ logger = setup_logger(__name__)
 # 加载数据集
 dataset = load_dataset(
     "parquet", # 或者 "csv", "parquet"
-    data_dir="/hdd0/zhongqishu/dataset/math/deepmath-103k/"
+    data_dir=r"D:\code\mess\datasets\deepmath-103k"
 )
 # 查看数据集的结构
 logger.info(dataset)
@@ -25,4 +25,4 @@ train_dataset = dataset['train']
 # 访问第一个样本
 first_sample = train_dataset[0]
 logger.info(first_sample)
-logger.info(f"length: {len(train_dataset)} samples")
+logger.info(f"{first_sample['question']}\n{first_sample['final_answer']}")

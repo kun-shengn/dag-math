@@ -1,12 +1,14 @@
 import logging
 
 from openai import OpenAI
-from src.utils.utils import extract_boxed_content
 from abc import ABC, abstractmethod
 from typing import List, Dict, Optional
 from config.log_config import setup_logger
 from config.llm_config import LLMConfig_Qwen3_8B, LLMConfig_Qwen2_5_math_7B, LLMConfig_Qwen3_5_Plus
-from prompts.qwen3_8B_prompt import qwen3_8B_prompt_system, qwen2_5_math_7B_prompt_system, qwen3_5_plus_prompt_system
+from src.utils.utils import extract_boxed_content
+from prompts.qwen3_8B_prompt import qwen3_8B_prompt_system
+from prompts.qwen3_5_plus_prompt import qwen3_5_plus_prompt_system
+from prompts.qwen2_5_math_7B_prompt import qwen2_5_math_7B_prompt_system
 
 # 配置 logger
 logger = setup_logger(__name__)

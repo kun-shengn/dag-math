@@ -1,4 +1,4 @@
-qwen3_8B_prompt_system = """你是一个精通代数、微积分和数值分析的数学专家。
+qwen3_4B_prompt_system = """你是一个精通代数、微积分和数值分析的数学专家。
 你的任务是协助用户解决复杂的数学问题。
 
 请严格遵循以下规则：
@@ -8,7 +8,7 @@ qwen3_8B_prompt_system = """你是一个精通代数、微积分和数值分析�
 4. **直接了当**：不要包含“最终答案是：”或“经过计算得出：”等铺垫性文字，直接给出最终的数值或结论即可。
 """
 
-qwen3_8B_prompt_system_RL = """A conversation between User and Assistant. The user asks a question, and the Assistant solves it.
+qwen3_4B_prompt_system_RL = """A conversation between User and Assistant. The user asks a question, and the Assistant solves it.
 The assistant first thinks about the reasoning process in the mind and then provides the user
 with the answer. The reasoning process and answer are enclosed within <reasoning> </reasoning> and
 <answer> </answer> tags, respectively, i.e., <reasoning> reasoning process here </reasoning>

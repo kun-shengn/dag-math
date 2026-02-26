@@ -8,7 +8,7 @@ def setup_logger(name: str) -> logging.Logger:
     current_date = datetime.now().strftime("%Y-%m-%d")
     
     # 定义日志文件路径
-    log_dir = "/hdd0/zhongqishu/code/DAG-math/log"
+    log_dir = "./log"
     os.makedirs(log_dir, exist_ok=True)  # 确保日志目录存在
     info_log_file = os.path.join(log_dir, f"info-{current_date}.log")
     error_log_file = os.path.join(log_dir, f"error-{current_date}.log")

@@ -20,9 +20,13 @@ class DataLoader_DeepMath_103k(DataLoader):
     """DeepMath-103k 数据加载器"""
     def load_data(self, file_path: str):
         """加载 DeepMath-103k 数据集"""
+        # 指定一个空间充足的缓存目录
+        cache_dir = "/mnt/iso/zqs_workspace/cache/huggingface" 
+        
         dataset = load_dataset(
             "parquet", # 或者 "csv", "parquet"
-            data_dir=file_path
+            data_dir=file_path,
+            cache_dir=cache_dir  # 添加这一行
         )
         return dataset['train']  # 返回训练集
     
@@ -74,10 +78,10 @@ class JSONLDataSaver(DataSaver):
 if __name__ == "__main__":
     # 加载数据
     data_loader = DataLoader_DeepMath_103k()
-    dataset = data_loader.load_data("/hdd0/zhongqishu/dataset/math/deepmath-103k/")
+    dataset = data_loader.load_data("/mnt/iso/zqs_workspace/dataset/deepmath-103k")
     data_filter = DataFilter_Deepmath_103k()   
     data_saver = JSONLDataSaver()
-    output_path = "/hdd0/zhongqishu/code/DAG-math/dataset/deepmath.jsonl"
+    output_path = "/mnt/iso/zqs_workspace/code/dag-math/dataset/deepmath.jsonl"
     count_filter = 0 # 计数器，记录符合条件的数据数量
     count_sum = 0 # 计数器，记录总数据数量
     for item in dataset:
