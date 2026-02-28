@@ -9,3 +9,8 @@
 
 # 忽略 model 目录
 /model/
+
+# PyTorch/Accelerate temp files
+torchelastic_*
+tmp*
+torchinductor_*

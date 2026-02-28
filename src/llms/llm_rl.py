@@ -6,13 +6,16 @@ import logging
 from abc import ABC, abstractmethod
 from config.log_config import setup_logger
 from src.dataset.process import DeepMath_processer
-from config.rl_llm_config import Qwen3_4B_GRPO_Config_DeepMath, grpo_config
+from config.rl_llm_config import Qwen3_4B_GRPO_Config_DeepMath, set_grpo_config
 from datasets import load_dataset, Dataset # 导入 datasets 库，用于加载和处理数据集
 from transformers import AutoTokenizer, AutoModelForCausalLM # 导入 transformers 库，用于加载预训练模型和 tokenizer
 from trl.trainer import GRPOConfig, GRPOTrainer # 导入 trl 库中的 GRPOConfig 和 GRPOTrainer，用于 GRPO 训练
 
 # 配置 logger
 logger = setup_logger(__name__)
+# # 🌟 核心修复：强制当前进程只使用自己分配到的那张物理卡，杜绝交叉占用！
+local_rank = int(os.environ.get("LOCAL_RANK", 0))
+torch.cuda.set_device(local_rank)
 
 # ---------------------------------------------------------
 # 定义大模型GRPO强化学习训练接口
@@ -61,15 +64,14 @@ class Qwen3_4B_LLM_GRPO(LLM_GRPO):
         processer = DeepMath_processer()
         dataset = processer.process_dataset(dataset_dir = dataset_dir)
         # 设置显存相关的环境变量，限制 PyTorch 显存分配策略，防止 OOM
-        os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'max_split_size_mb:128'
-        training_args = grpo_config(Qwen3_4B_GRPO_Config_DeepMath()) # 初始化 GRPO 训练参数配置
+        # os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'max_split_size_mb:128'
+        training_args = set_grpo_config(Qwen3_4B_GRPO_Config_DeepMath()) # 初始化 GRPO 训练参数配置
 
         # 加载预训练模型
         model = AutoModelForCausalLM.from_pretrained(
-            model_dir, # 模型名称
-            torch_dtype=torch.bfloat16, # 指定数据类型为 bfloat16
-            # attn_implementation="flash_attention_2", # T4 不支持 flash_attention_2，如果使用 A100 等 Ampere 架构 GPU 可以启用
-            device_map="auto", # 自动选择设备 (GPU 或 CPU)
+            model_dir, 
+            torch_dtype=torch.bfloat16, 
+            # device_map={"": local_rank}, # 核心修复：强制当前进程的模型严格加载到对应的 GPU 上
         )
 
         # 加载 tokenizer
@@ -88,7 +90,7 @@ class Qwen3_4B_LLM_GRPO(LLM_GRPO):
                 self.correctness_reward_func # 正确性奖励函数
             ],
             args=training_args, # 传入训练参数
-            train_dataset=dataset, # 传入训练数据集
+            train_dataset=dataset['train'], # 传入训练数据集
         )
 
         # 开始训练
